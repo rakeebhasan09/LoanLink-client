@@ -6,34 +6,46 @@ import Register from "../pages/AuthPage/Register/Register";
 import PrivetRoute from "./PrivetRoute";
 
 export const router = createBrowserRouter([
-    {
-        path: '/',
-        Component: Root,
-        children: [
-            {
-                index: true,
-                Component: Home
-            },
-            {
-                path: '/all-issues',
-                element: <PrivetRoute><h2 className='text-5xl font-bold text-center py-15'>All Issues</h2></PrivetRoute>
-            },
-            {
-                path: '/how-it-works',
-                element: <h2 className='text-5xl font-bold text-center py-15'>How It Works</h2>
-            },
-            {
-                path: '/about-us',
-                element: <PrivetRoute><h2 className='text-5xl font-bold text-center py-15'>About Us</h2></PrivetRoute>
-            },
-            {
-                path: '/login',
-                Component: Login,
-            },
-            {
-                path: '/register',
-                Component: Register,
-            }
-        ]
-    },
+	{
+		path: "/",
+		Component: Root,
+		children: [
+			{
+				index: true,
+				Component: Home,
+			},
+			{
+				path: "/all-loans",
+				element: (
+					<h2 className="text-5xl font-bold text-center py-15">
+						All Loans
+					</h2>
+				),
+			},
+			{
+				path: "/about",
+				element: (
+					<h2 className="text-5xl font-bold text-center py-15">
+						About Us
+					</h2>
+				),
+			},
+			{
+				path: "/contact",
+				element: (
+					<h2 className="text-5xl font-bold text-center py-15">
+						Contact
+					</h2>
+				),
+			},
+			{
+				path: "/login",
+				Component: Login,
+			},
+			{
+				path: "/register",
+				Component: Register,
+			},
+		],
+	},
 ]);

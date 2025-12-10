@@ -79,14 +79,14 @@ const Nav = () => {
 							</div>
 							{/* Logo */}
 							<Link to="/" className="flex items-center gap-2">
-								<div className="hidden sm:flex h-10 w-10 items-center justify-center rounded-xl bg-[#19C195]">
+								<div className="hidden sm:flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
 									<span className="text-lg text-white font-bold">
 										L
 									</span>
 								</div>
 								<span className="text-xl font-bold">
 									Loan
-									<span className="text-[#19C195]">Link</span>
+									<span className="text-primary">Link</span>
 								</span>
 							</Link>
 						</div>
@@ -110,7 +110,7 @@ const Nav = () => {
 												alt=""
 											/>
 											{open && (
-												<div className="absolute menu right-0 w-[235px] pt-[18px] pb-2 rounded-lg space-y-3 bg-[#F8F8F8] dark:bg-gray-900 shadow-sm dark:shadow-md">
+												<div className="absolute menu right-0 pt-[18px] pb-2 rounded-lg space-y-3 bg-[#F8F8F8] dark:bg-gray-900 shadow-sm dark:shadow-md">
 													<div className="px-[15px]">
 														<h3 className="text-[#141414] dark:text-white text-[20px] font-semibold">
 															{user.displayName}

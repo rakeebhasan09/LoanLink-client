@@ -5,12 +5,21 @@
 	themes: light --default, dark --prefersdark;
 }
 
-@plugin "daisyui/theme" {
-	--color-primary: #1bc298;
-	--color-secondary: #0f1729;
-	--color-muted: #65758b;
+@layer base {
+	:root {
+		--color-primary: #1bc298 !important;
+		--color-secondary: #0f1729 !important;
+		--color-muted: #65758b !important;
+	}
+}
 
-	/* --font-inter: "Inter", sans-serif; */
+.text-gradient {
+	@apply bg-clip-text text-transparent;
+	background-image: linear-gradient(
+		135deg,
+		rgba(35, 191, 155, 1) 0%,
+		rgba(41, 136, 130, 1) 100%
+	);
 }
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
@@ -59,4 +68,7 @@ button {
 .divider::after {
 	background: #219e64;
 	height: 1px;
+}
+
+.hero-gradiant {
 }
