@@ -9,6 +9,9 @@ import About from "../pages/About/About";
 import Contact from "../pages/About/Contact/Contact";
 import LoanDetails from "../pages/LoanDetails/LoanDetails";
 import Apply from "../pages/Apply/Apply";
+import Dashboard from "../components/Layouts/Dashboard";
+import Profile from "../pages/Dashboard/Profile/Profile";
+import MyLoans from "../pages/Dashboard/MyLoans/MyLoans";
 
 export const router = createBrowserRouter([
 	{
@@ -40,7 +43,7 @@ export const router = createBrowserRouter([
 				),
 			},
 			{
-				path: "/apply",
+				path: "/apply/:loanId",
 				element: (
 					<PrivetRoute>
 						<Apply />
@@ -54,6 +57,30 @@ export const router = createBrowserRouter([
 			{
 				path: "/register",
 				Component: Register,
+			},
+		],
+	},
+
+	// Dashboar Routes
+	{
+		path: "dashboard",
+		element: (
+			<PrivetRoute>
+				<Dashboard />
+			</PrivetRoute>
+		),
+		children: [
+			{
+				index: true,
+				Component: Profile,
+			},
+			{
+				path: "profile",
+				Component: Profile,
+			},
+			{
+				path: "my-loans",
+				Component: MyLoans,
 			},
 		],
 	},
