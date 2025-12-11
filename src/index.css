@@ -20,6 +20,10 @@
 	}
 }
 
+.text-muted {
+	color: var(--color-muted);
+}
+
 .text-gradient {
 	@apply bg-clip-text text-transparent;
 	background-image: linear-gradient(
@@ -79,7 +83,4 @@ button {
 .divider::after {
 	background: #219e64;
 	height: 1px;
-}
-
-.hero-gradiant {
 }
