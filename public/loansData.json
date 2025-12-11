@@ -1,56 +1,134 @@
 [
 	{
-		"_id": "1",
+		"_id": 1,
 		"title": "Personal Loan",
 		"description": "Quick personal loans for your immediate needs with flexible repayment options.",
 		"image": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&h=250&fit=crop",
 		"category": "Personal",
 		"interest": "8.5%",
-		"maxLimit": "25,000"
+		"maxLimit": "25,000",
+		"emiPlans": [
+			"3 months",
+			"6 months",
+			"12 months",
+			"24 months",
+			"36 months"
+		],
+		"requiredDocs": [
+			"Government ID",
+			"Proof of Income",
+			"Bank Statements",
+			"Proof of Address"
+		]
 	},
 	{
-		"_id": "2",
+		"_id": 2,
 		"title": "Business Loan",
 		"description": "Fuel your business growth with our tailored business financing solutions.",
 		"image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=250&fit=crop",
 		"category": "Business",
 		"interest": "10.5%",
-		"maxLimit": "100,000"
+		"maxLimit": "100,000",
+		"emiPlans": [
+			"3 months",
+			"6 months",
+			"12 months",
+			"24 months",
+			"36 months"
+		],
+		"requiredDocs": [
+			"Government ID",
+			"Proof of Income",
+			"Bank Statements",
+			"Proof of Address"
+		]
 	},
 	{
-		"_id": "3",
+		"_id": 3,
 		"title": "Education Loan",
 		"description": "Invest in your future with affordable education financing options.",
 		"image": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=250&fit=crop",
 		"category": "Education",
 		"interest": "6.5%",
-		"maxLimit": "50,000"
+		"maxLimit": "50,000",
+		"emiPlans": [
+			"3 months",
+			"6 months",
+			"12 months",
+			"24 months",
+			"36 months"
+		],
+		"requiredDocs": [
+			"Government ID",
+			"Proof of Income",
+			"Bank Statements",
+			"Proof of Address"
+		]
 	},
 	{
-		"_id": "4",
+		"_id": 4,
 		"title": "Emergency Loan",
 		"description": "Fast approval for unexpected expenses and emergencies.",
 		"image": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=250&fit=crop",
 		"category": "Emergency",
 		"interest": "12%",
-		"maxLimit": "10,000"
+		"maxLimit": "10,000",
+		"emiPlans": [
+			"3 months",
+			"6 months",
+			"12 months",
+			"24 months",
+			"36 months"
+		],
+		"requiredDocs": [
+			"Government ID",
+			"Proof of Income",
+			"Bank Statements",
+			"Proof of Address"
+		]
 	},
 	{
-		"_id": "5",
+		"_id": 5,
 		"title": "Home Improvement",
 		"description": "Transform your home with our renovation and improvement loans.",
 		"image": "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&h=250&fit=crop",
 		"category": "Home",
 		"interest": "9%",
-		"maxLimit": "75,000"
+		"maxLimit": "75,000",
+		"emiPlans": [
+			"3 months",
+			"6 months",
+			"12 months",
+			"24 months",
+			"36 months"
+		],
+		"requiredDocs": [
+			"Government ID",
+			"Proof of Income",
+			"Bank Statements",
+			"Proof of Address"
+		]
 	},
 	{
-		"_id": "6",
+		"_id": 6,
 		"title": "Medical Loan",
 		"description": "Healthcare financing for medical treatments and procedures.",
 		"image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=250&fit=crop",
 		"category": "Medical",
 		"interest": "7.5%",
-		"maxLimit": "30,000"
+		"maxLimit": "30,000",
+		"emiPlans": [
+			"3 months",
+			"6 months",
+			"12 months",
+			"24 months",
+			"36 months"
+		],
+		"requiredDocs": [
+			"Government ID",
+			"Proof of Income",
+			"Bank Statements",
+			"Proof of Address"
+		]
 	}
 ]

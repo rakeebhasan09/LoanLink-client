@@ -55,7 +55,7 @@ const LoanCard = ({ loan }) => {
 					<div>
 						<Link
 							className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold transition-all duration-300 border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-white h-10 px-5 py-2 w-full"
-							to={`/loan/${loan._id}`}
+							to={`/loan-details/${loan._id}`}
 						>
 							View Details
 							<ArrowRight className="ml-2 h-4 w-4" />

@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { Send } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const ContactForm = () => {
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors },
+	} = useForm();
+
+	const handleContactForm = (data) => {
+		setIsSubmitting(true);
+		toast.success("Thanks for your message.");
+		reset();
+		setIsSubmitting(false);
+	};
 	return (
 		<div>
 			{/* Contact Form */}
@@ -15,7 +32,10 @@ const ContactForm = () => {
 						Send us a Message
 					</h2>
 
-					<form className="space-y-5">
+					<form
+						onSubmit={handleSubmit(handleContactForm)}
+						className="space-y-5"
+					>
 						{/* Name Email */}
 						<div className="grid gap-4 sm:grid-cols-2">
 							{/* Name */}
@@ -27,8 +47,13 @@ const ContactForm = () => {
 									type="text"
 									className="flex h-10 w-full outline-0 rounded-md border border-[#E1E7EF] dark:border-[#222F44] px-3 py-2 text-base"
 									placeholder="John Doe"
-									required
+									{...register("name", { required: true })}
 								/>
+								{errors.name?.type === "required" && (
+									<p className="text-red-500 text-xs">
+										Name is required
+									</p>
+								)}
 							</div>
 							{/* Name */}
 							<div className="space-y-2">
@@ -39,8 +64,13 @@ const ContactForm = () => {
 									type="email"
 									className="flex h-10 w-full outline-0 rounded-md border border-[#E1E7EF] dark:border-[#222F44] px-3 py-2 text-base"
 									placeholder="john@example.com"
-									required
+									{...register("email", { required: true })}
 								/>
+								{errors.email?.type === "required" && (
+									<p className="text-red-500 text-xs">
+										Email is required
+									</p>
+								)}
 							</div>
 						</div>
 
@@ -53,8 +83,13 @@ const ContactForm = () => {
 								type="text"
 								className="flex h-10 w-full outline-0 rounded-md border border-[#E1E7EF] dark:border-[#222F44] px-3 py-2 text-base"
 								placeholder="How can we help?"
-								required
+								{...register("subject", { required: true })}
 							/>
+							{errors.subject?.type === "required" && (
+								<p className="text-red-500 text-xs">
+									Subject is required
+								</p>
+							)}
 						</div>
 
 						{/* Message */}
@@ -66,7 +101,24 @@ const ContactForm = () => {
 								className="flex w-full outline-0 rounded-md border border-[#E1E7EF] dark:border-[#222F44] px-3 py-2 text-base resize-none"
 								rows={5}
 								placeholder="Your message..."
+								{...register("message", { required: true })}
 							></textarea>
+							{errors.message?.type === "required" && (
+								<p className="text-red-500 text-xs">
+									Message is required
+								</p>
+							)}
+						</div>
+
+						<div>
+							<button
+								type="submit"
+								className="w-full inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold transition-all duration-300 bg-primary text-white hover:bg-primary/90 shadow-md hover:shadow-lg hover:-translate-y-0.5 h-12 rounded-xl px-8 text-base"
+								disabled={isSubmitting}
+							>
+								{isSubmitting ? "Sending..." : "Send Message"}
+								<Send className="ml-2 h-4 w-4" />
+							</button>
 						</div>
 					</form>
 				</div>

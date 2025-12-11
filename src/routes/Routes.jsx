@@ -7,6 +7,8 @@ import PrivetRoute from "./PrivetRoute";
 import AllLoans from "../pages/AllLoans/AllLoans";
 import About from "../pages/About/About";
 import Contact from "../pages/About/Contact/Contact";
+import LoanDetails from "../pages/LoanDetails/LoanDetails";
+import Apply from "../pages/Apply/Apply";
 
 export const router = createBrowserRouter([
 	{
@@ -28,6 +30,22 @@ export const router = createBrowserRouter([
 			{
 				path: "/contact",
 				Component: Contact,
+			},
+			{
+				path: "/loan-details/:loanId",
+				element: (
+					<PrivetRoute>
+						<LoanDetails />
+					</PrivetRoute>
+				),
+			},
+			{
+				path: "/apply",
+				element: (
+					<PrivetRoute>
+						<Apply />
+					</PrivetRoute>
+				),
 			},
 			{
 				path: "/login",
