@@ -24,6 +24,10 @@
 	color: var(--color-muted);
 }
 
+.shadow-glow {
+	box-shadow: 0 0 40px rgba(16, 183, 127, 0.3);
+}
+
 .text-gradient {
 	@apply bg-clip-text text-transparent;
 	background-image: linear-gradient(

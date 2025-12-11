@@ -1,12 +1,21 @@
-import { TrendingUp } from "lucide-react";
-import React from "react";
+import { ArrowRight, TrendingUp } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import LoanCard from "../../Shared/LoanCard";
+import { motion } from "framer-motion";
+import { Link } from "react-router";
 
 const AvailableLoan = () => {
+	const [loans, setLoans] = useState([]);
+	useEffect(() => {
+		fetch("/loansData.json")
+			.then((res) => res.json())
+			.then((data) => setLoans(data));
+	}, []);
 	return (
 		<section className="py-16 lg:py-24 dark:bg-[#080C16]">
 			<div className="container">
 				{/* Section Title */}
-				<div className="flex flex-col gap-4 items-center">
+				<div className="flex mb-12 flex-col gap-4 items-center">
 					<div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-[#F4F7FA] dark:bg-[#192232]">
 						<TrendingUp className="mr-1 h-3 w-3" />
 						Featured Loans
@@ -22,7 +31,27 @@ const AvailableLoan = () => {
 				</div>
 
 				{/* Loan Cards */}
-				<div></div>
+				<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+					{loans.map((loan) => (
+						<LoanCard key={loan._id} loan={loan} />
+					))}
+				</div>
+
+				{/* CTA */}
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true }}
+					className="mt-12 text-center"
+				>
+					<Link
+						className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold ring-offset-background transition-all duration-300 gradient-primary text-white dark:text-[#080C16] hover:shadow-glow hover:-translate-y-0.5 h-12 rounded-xl px-8 text-base"
+						to="/all-loans"
+					>
+						View All Loans
+						<ArrowRight className="ml-2 h-5 w-5" />
+					</Link>
+				</motion.div>
 			</div>
 		</section>
 	);
