@@ -3,6 +3,7 @@ import AboutTitle from "./AboutTitle/AboutTitle";
 import AboutState from "./AboutState/AboutState";
 import Mission from "./Mission/Mission";
 import CoreValues from "./CoreValues/CoreValues";
+import Leadership from "./Leadership/Leadership";
 
 const About = () => {
 	return (
@@ -13,6 +14,7 @@ const About = () => {
 				<AboutState />
 				<Mission />
 				<CoreValues />
+				<Leadership />
 			</main>
 		</>
 	);
