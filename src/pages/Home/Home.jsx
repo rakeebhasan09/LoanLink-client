@@ -5,6 +5,7 @@ import HowItWorks from "./HowItWorks/HowItWorks";
 import StatsSection from "./StatsSection/StatsSection";
 import CustomersSay from "./CustomersSay/CustomersSay";
 import FAQSection from "./FAQSection/FAQSection";
+import CTASection from "./CTASection/CTASection";
 
 const Home = () => {
 	return (
@@ -15,6 +16,7 @@ const Home = () => {
 			<StatsSection />
 			<CustomersSay />
 			<FAQSection />
+			<CTASection />
 		</>
 	);
 };
