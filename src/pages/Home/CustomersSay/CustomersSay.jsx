@@ -51,7 +51,7 @@ const CustomersSay = () => {
 	const swiperRef = useRef(null);
 
 	return (
-		<section className="py-16 lg:py-24 bg-white dark:bg-[#080C16]">
+		<section className="py-16 lg:py-24 pb-20 bg-white dark:bg-[#080C16]">
 			<div className="container">
 				{/* Header */}
 				<div className="mb-12">
@@ -111,7 +111,7 @@ const CustomersSay = () => {
 										"{t.content}"
 									</p>
 
-									<div className="flex items-center justify-between">
+									<div className="flex flex-col md:flex-row gap-5 md:items-center justify-between">
 										<div className="flex items-center gap-4">
 											<img
 												src={t.image}

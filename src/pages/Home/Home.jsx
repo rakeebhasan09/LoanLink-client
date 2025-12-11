@@ -4,6 +4,7 @@ import AvailableLoan from "./AvailableLoan/AvailableLoan";
 import HowItWorks from "./HowItWorks/HowItWorks";
 import StatsSection from "./StatsSection/StatsSection";
 import CustomersSay from "./CustomersSay/CustomersSay";
+import FAQSection from "./FAQSection/FAQSection";
 
 const Home = () => {
 	return (
@@ -13,6 +14,7 @@ const Home = () => {
 			<HowItWorks />
 			<StatsSection />
 			<CustomersSay />
+			<FAQSection />
 		</>
 	);
 };
