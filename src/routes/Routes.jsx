@@ -5,6 +5,7 @@ import Login from "../pages/AuthPage/Login/Login";
 import Register from "../pages/AuthPage/Register/Register";
 import PrivetRoute from "./PrivetRoute";
 import AllLoans from "../pages/AllLoans/AllLoans";
+import About from "../pages/About/About";
 
 export const router = createBrowserRouter([
 	{
@@ -21,11 +22,7 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: "/about",
-				element: (
-					<h2 className="text-5xl font-bold text-center py-15">
-						About Us
-					</h2>
-				),
+				Component: About,
 			},
 			{
 				path: "/contact",
