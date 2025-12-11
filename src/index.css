@@ -10,6 +10,7 @@
 		--color-primary: #1bc298 !important;
 		--color-secondary: #0f1729 !important;
 		--color-muted: #65758b !important;
+		--color-foreground: #0f1729 !important;
 
 		--gradient-primary: linear-gradient(
 			135deg,
