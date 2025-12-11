@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/AuthPage/Login/Login";
 import Register from "../pages/AuthPage/Register/Register";
 import PrivetRoute from "./PrivetRoute";
+import AllLoans from "../pages/AllLoans/AllLoans";
 
 export const router = createBrowserRouter([
 	{
@@ -16,11 +17,7 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: "/all-loans",
-				element: (
-					<h2 className="text-5xl font-bold text-center py-15">
-						All Loans
-					</h2>
-				),
+				Component: AllLoans,
 			},
 			{
 				path: "/about",
