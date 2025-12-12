@@ -19,7 +19,7 @@ const LoanCard = ({ loan }) => {
 				{/* Image Div */}
 				<div className="relative h-48 overflow-hidden">
 					<img
-						src={loan.image}
+						src={loan.photo}
 						alt={loan.title}
 						className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
 					/>
@@ -42,7 +42,7 @@ const LoanCard = ({ loan }) => {
 								Interest Rate
 							</p>
 							<p className="font-semibold text-primary">
-								{loan.interest}
+								{loan.interestRate}%
 							</p>
 						</div>
 						<div className="text-right">

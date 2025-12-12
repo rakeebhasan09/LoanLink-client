@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import useAuth from "../../../hooks/useAuth";
 import useSecureAxios from "../../../hooks/useSecureAxios";
@@ -9,11 +9,14 @@ import Swal from "sweetalert2";
 const ManageLoans = () => {
 	const { user } = useAuth();
 	const secureAxios = useSecureAxios();
+	const [searchText, setSearchText] = useState("");
 
 	const { data: loans = [], refetch } = useQuery({
-		queryKey: ["loans", user?.email],
+		queryKey: ["loans", user?.email, searchText],
 		queryFn: async () => {
-			const res = await secureAxios.get(`/loans?email=${user?.email}`);
+			const res = await secureAxios.get(
+				`/loans?email=${user?.email}&searchText=${searchText}`
+			);
 			return res.data;
 		},
 	});
@@ -55,6 +58,7 @@ const ManageLoans = () => {
 				</h1>
 				<input
 					type="text"
+					onChange={(e) => setSearchText(e.target.value)}
 					placeholder="Search Loans...."
 					className="flex h-10 rounded-md border border-[#E1E7EF] dark:border-[#1F1F1F] outline-0 bg-background px-3 py-2 text-base dark:bg-[#080C16]"
 				/>

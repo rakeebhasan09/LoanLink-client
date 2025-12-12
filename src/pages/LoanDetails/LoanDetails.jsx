@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
 	ArrowLeft,
@@ -8,7 +8,9 @@ import {
 	FileText,
 	Percent,
 } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
+import useRole from "../../hooks/useRole";
+import useSecureAxios from "../../hooks/useSecureAxios";
 
 const emiPlans = ["3", "6", "12", "24", "36"];
 
@@ -20,6 +22,14 @@ const requiredDocs = [
 ];
 
 const LoanDetails = () => {
+	const { role } = useRole();
+	const { loanId } = useParams();
+	const secureAxios = useSecureAxios();
+	const [loan, setLoan] = useState({});
+
+	useEffect(() => {
+		secureAxios.get(`/loans/${loanId}`).then((res) => setLoan(res.data));
+	}, [secureAxios, loanId]);
 	return (
 		<>
 			<title>Loan Details - LoanLink</title>
@@ -48,12 +58,12 @@ const LoanDetails = () => {
 						>
 							<div className="relative overflow-hidden rounded-2xl">
 								<img
-									src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&h=250&fit=crop"
-									alt=""
+									src={loan.photo}
+									alt={loan.title}
 									className="w-full h-80 lg:h-96 object-cover"
 								/>
 								<span className="absolute top-4 left-4 bg-primary rounded-full text-base px-4 py-2">
-									Home
+									{loan.category}
 								</span>
 							</div>
 						</motion.div>
@@ -65,11 +75,10 @@ const LoanDetails = () => {
 						>
 							<div>
 								<h1 className="text-3xl font-bold  lg:text-4xl">
-									Loan Title
+									{loan.title}
 								</h1>
 								<p className="mt-4 text-lg text-[#65758B]">
-									Quick personal loans for your immediate
-									needs with flexible repayment options.
+									{loan.description}
 								</p>
 							</div>
 
@@ -82,7 +91,9 @@ const LoanDetails = () => {
 											Interest Rate
 										</span>
 									</div>
-									<p className="text-2xl font-bold">12%</p>
+									<p className="text-2xl font-bold">
+										{loan.interestRate}%
+									</p>
 								</div>
 								<div className="rounded-xl bg-[#F1F5F9] dark:bg-[#1D283A] p-4">
 									<div className="flex items-center gap-2 text-primary mb-2">
@@ -92,7 +103,7 @@ const LoanDetails = () => {
 										</span>
 									</div>
 									<p className="text-2xl font-bold text-foreground">
-										$20000
+										${loan.maxLimit}
 									</p>
 								</div>
 							</div>
@@ -106,7 +117,7 @@ const LoanDetails = () => {
 									</h3>
 								</div>
 								<div className="flex flex-wrap gap-2">
-									{emiPlans.map((plan) => (
+									{loan.EMIPlans?.map((plan) => (
 										<span
 											key={plan}
 											className="text-sm px-3 py-1 rounded-full bg-[#F4F7FA] dark:bg-[#192232]"
@@ -126,7 +137,7 @@ const LoanDetails = () => {
 									</h3>
 								</div>
 								<ul className="grid grid-cols-2 gap-2">
-									{requiredDocs.map((doc) => (
+									{loan.documents?.map((doc) => (
 										<li
 											key={doc}
 											className="flex items-center gap-2"
@@ -140,13 +151,22 @@ const LoanDetails = () => {
 
 							{/* Apply Button */}
 							<div>
-								<Link
-									className="flex items-center justify-center gap-1.5 bg-primary text-white h-12 rounded-full"
-									to={`/apply/4`}
-								>
-									Apply Now
-									<ArrowRight className="ml-2 h-5 w-5" />
-								</Link>
+								{role === "borrower" ? (
+									<Link
+										className="flex items-center justify-center gap-1.5 bg-primary text-white h-12 rounded-full"
+										to={`/apply/${loanId}`}
+									>
+										Apply Now
+										<ArrowRight className="ml-2 h-5 w-5" />
+									</Link>
+								) : (
+									<button
+										disabled
+										className="flex w-full disabled cursor-no-drop items-center justify-center gap-1.5 bg-primary text-white h-12 rounded-full"
+									>
+										Only Borrower Can Apply
+									</button>
+								)}
 							</div>
 						</motion.div>
 					</div>

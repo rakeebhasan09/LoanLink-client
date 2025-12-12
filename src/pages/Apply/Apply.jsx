@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router";
+import useSecureAxios from "../../hooks/useSecureAxios";
 
 const Apply = () => {
 	const { user } = useAuth();
@@ -11,6 +13,14 @@ const Apply = () => {
 		formState: { errors },
 		handleSubmit,
 	} = useForm();
+	const [loan, setLoan] = useState({});
+	const { loanId } = useParams();
+	const secureAxios = useSecureAxios();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		secureAxios.get(`/loans/${loanId}`).then((res) => setLoan(res.data));
+	}, [secureAxios, loanId]);
 
 	const handleLoanApplication = (data) => {
 		console.log(data);
@@ -23,7 +33,10 @@ const Apply = () => {
 					initial={{ opacity: 0, x: -20 }}
 					animate={{ opacity: 1, x: 0 }}
 				>
-					<button className="mb-6 flex items-center gap-2 px-5 py-2 hover:bg-primary hover:text-white transition duration-300 rounded-full">
+					<button
+						onClick={() => navigate(-1)}
+						className="mb-6 flex items-center gap-2 px-5 py-2 hover:bg-primary hover:text-white transition duration-300 rounded-full"
+					>
 						<ArrowLeft className="mr-2 h-4 w-4" />
 						Back to Loan Details
 					</button>
@@ -41,7 +54,7 @@ const Apply = () => {
 						<p className="text-muted-foreground mb-8">
 							Applying for:{" "}
 							<span className="font-medium text-primary">
-								loan.title
+								{loan.title}
 							</span>
 						</p>
 
@@ -63,7 +76,7 @@ const Apply = () => {
 								<div className="space-y-2">
 									<label className="block">Loan Title</label>
 									<input
-										value="loan title"
+										value={loan.title}
 										readOnly
 										{...register("loanTitle")}
 										className="bg-[#F5F7F9] flex h-10 w-full rounded-md border border-[#E1E7EF] dark:border-transparent px-3 py-2 text-base outline-0 text-[#878B94] dark:bg-[#151E2E] dark:text-[#777C85]"
@@ -74,7 +87,7 @@ const Apply = () => {
 										Interest Rate
 									</label>
 									<input
-										value="loan interest"
+										value={`${loan.interestRate}%`}
 										readOnly
 										{...register("loanInterest")}
 										className="bg-[#F5F7F9] flex h-10 w-full rounded-md border border-[#E1E7EF] dark:border-transparent px-3 py-2 text-base outline-0 text-[#878B94] dark:bg-[#151E2E] dark:text-[#777C85]"

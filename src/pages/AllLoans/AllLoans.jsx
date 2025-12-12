@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import LoanCard from "../Shared/LoanCard";
+import useSecureAxios from "../../hooks/useSecureAxios";
 
 const AllLoans = () => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [loans, setLoans] = useState([]);
 	const [selectedCategory, setSelectedCategory] = useState("all");
+	const secureAxios = useSecureAxios();
 
 	useEffect(() => {
-		fetch("/loansData.json")
-			.then((res) => res.json())
-			.then((data) => setLoans(data));
-	}, []);
+		secureAxios.get("/loans").then((res) => setLoans(res.data));
+	}, [secureAxios]);
 
 	const categories = [...new Set(loans.map((loan) => loan.category))];
 

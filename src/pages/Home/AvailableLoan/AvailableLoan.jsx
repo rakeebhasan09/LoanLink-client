@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import LoanCard from "../../Shared/LoanCard";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
+import useSecureAxios from "../../../hooks/useSecureAxios";
 
 const AvailableLoan = () => {
 	const [loans, setLoans] = useState([]);
+	const secureAxios = useSecureAxios();
 	useEffect(() => {
-		fetch("/loansData.json")
-			.then((res) => res.json())
-			.then((data) => setLoans(data));
-	}, []);
+		secureAxios.get("/featured-loans").then((res) => setLoans(res.data));
+	}, [secureAxios]);
 	return (
 		<section className="py-16 lg:py-24 dark:bg-[#080C16]">
 			<div className="container">
