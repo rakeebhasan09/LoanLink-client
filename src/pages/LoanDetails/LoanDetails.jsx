@@ -10,13 +10,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router";
 
-const emiPlans = [
-	"3 months",
-	"6 months",
-	"12 months",
-	"24 months",
-	"36 months",
-];
+const emiPlans = ["3", "6", "12", "24", "36"];
 
 const requiredDocs = [
 	"Government ID",
@@ -117,7 +111,7 @@ const LoanDetails = () => {
 											key={plan}
 											className="text-sm px-3 py-1 rounded-full bg-[#F4F7FA] dark:bg-[#192232]"
 										>
-											{plan}
+											{plan} months
 										</span>
 									))}
 								</div>

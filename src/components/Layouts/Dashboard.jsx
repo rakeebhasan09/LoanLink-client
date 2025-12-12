@@ -22,7 +22,7 @@ const Dashboard = () => {
 	return (
 		<div className="flex flex-col min-h-screen">
 			<DashboardNavbar open={open} handleSidebar={handleSidebar} />
-			<div className="relative grow h-[calc(100vh-64px)]">
+			<div className="relative grow min-h-[calc(100vh-64px)]">
 				{/* Aside Bar */}
 				<div
 					className={`absolute lg:left-0 bg-[#FAFAFA] dark:bg-[#0B111E] w-[300px] h-full transition-all duration-300 dark:border-r dark:border-r-primary ${
@@ -68,7 +68,7 @@ const Dashboard = () => {
 							<>
 								<li>
 									<Link
-										to="/dashboard/my-loans"
+										to="/dashboard/add-loan"
 										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
 									>
 										<PlusCircle />
