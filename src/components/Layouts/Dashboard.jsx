@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import DashboardNavbar from "../../pages/Dashboard/DashboardNavbar/DashboardNavbar";
 import { Link, Outlet } from "react-router";
-import { CreditCard, User } from "lucide-react";
+import {
+	CheckCircle,
+	ClipboardList,
+	CreditCard,
+	FileText,
+	PlusCircle,
+	User,
+	Users,
+} from "lucide-react";
+import useRole from "../../hooks/useRole";
 
 const Dashboard = () => {
 	const [open, setOpen] = useState(false);
+	const { role } = useRole();
 	// Sidebar Handler
 	const handleSidebar = () => {
 		setOpen(!open);
@@ -20,15 +30,97 @@ const Dashboard = () => {
 					}`}
 				>
 					<ul className="px-4 py-10">
-						<li>
-							<Link
-								to="/dashboard/my-loans"
-								className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
-							>
-								<CreditCard />
-								<span>My Loans</span>
-							</Link>
-						</li>
+						{/* Links For Admin Only */}
+						{role === "admin" && (
+							<>
+								<li>
+									<Link
+										to="/dashboard/my-loans"
+										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
+									>
+										<Users />
+										<span>Manage Users</span>
+									</Link>
+								</li>
+								<li>
+									<Link
+										to="/dashboard/my-loans"
+										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
+									>
+										<FileText />
+										<span>All Loan</span>
+									</Link>
+								</li>
+								<li>
+									<Link
+										to="/dashboard/my-loans"
+										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
+									>
+										<FileText />
+										<span>Loan Applications</span>
+									</Link>
+								</li>
+							</>
+						)}
+
+						{/* Links For Manager Only */}
+						{role === "manager" && (
+							<>
+								<li>
+									<Link
+										to="/dashboard/my-loans"
+										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
+									>
+										<PlusCircle />
+										<span>Add Loan</span>
+									</Link>
+								</li>
+								<li>
+									<Link
+										to="/dashboard/my-loans"
+										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
+									>
+										<FileText />
+										<span>Manage Loans</span>
+									</Link>
+								</li>
+								<li>
+									<Link
+										to="/dashboard/my-loans"
+										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
+									>
+										<ClipboardList />
+										<span>Pending Applications</span>
+									</Link>
+								</li>
+								<li>
+									<Link
+										to="/dashboard/my-loans"
+										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
+									>
+										<CheckCircle />
+										<span>Approved Applications</span>
+									</Link>
+								</li>
+							</>
+						)}
+
+						{/* Links For Borrower Only */}
+						{role === "borrower" && (
+							<>
+								<li>
+									<Link
+										to="/dashboard/my-loans"
+										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
+									>
+										<CreditCard />
+										<span>My Loans</span>
+									</Link>
+								</li>
+							</>
+						)}
+
+						{/* Links For Every One */}
 						<li>
 							<Link
 								to="/dashboard"

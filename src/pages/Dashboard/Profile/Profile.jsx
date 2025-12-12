@@ -4,10 +4,12 @@ import useAuth from "../../../hooks/useAuth";
 import { LogOut, Mail, Shield } from "lucide-react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import useRole from "../../../hooks/useRole";
 
 const Profile = () => {
 	const { user, logOut } = useAuth();
 	const navigate = useNavigate();
+	const { role } = useRole();
 
 	// Logout Handler
 	const handleLogout = () => {
@@ -37,7 +39,7 @@ const Profile = () => {
 							{user.displayName}
 						</h2>
 						<p className="text-[#65758B] dark:text-[#94A3B8]">
-							User Role
+							{role}
 						</p>
 					</div>
 				</div>
@@ -60,7 +62,7 @@ const Profile = () => {
 								<p className="text-sm text-[#65758B] dark:text-[#94A3B8]">
 									Role
 								</p>
-								<p className="font-medium">Borrower</p>
+								<p className="font-medium">{role}</p>
 							</div>
 						</div>
 					</div>

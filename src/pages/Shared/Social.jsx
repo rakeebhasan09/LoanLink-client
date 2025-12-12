@@ -2,15 +2,32 @@ import React from "react";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router";
+import useSecureAxios from "../../hooks/useSecureAxios";
 
 const Social = () => {
 	const { signWithGoogle } = useAuth();
 	const location = useLocation();
 	const navigate = useNavigate();
+	const secureAxios = useSecureAxios();
+
 	// Google Login
 	const handleGoogleSignIn = () => {
 		signWithGoogle()
-			.then(() => {
+			.then((result) => {
+				// Create User In MongoDB
+				const userInfo = {
+					email: result.user.email,
+					displayName: result.user.displayName,
+					photoURL: result.user.photoURL,
+					role: "borrower",
+				};
+
+				secureAxios.post("/users", userInfo).then((res) => {
+					if (res.data.insertedId) {
+						console.log("Login Successfull.");
+					}
+				});
+
 				navigate(location.state || "/");
 				toast.success("Google login successful!");
 			})

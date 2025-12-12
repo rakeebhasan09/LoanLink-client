@@ -5,6 +5,8 @@ import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Social from "../../Shared/Social";
+import useSecureAxios from "../../../hooks/useSecureAxios";
 
 const Register = () => {
 	const [showPass, setShowPass] = useState(false);
@@ -13,9 +15,10 @@ const Register = () => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
-	const { createUser, signWithGoogle, updateUserProfile } = useAuth();
+	const { createUser, updateUserProfile } = useAuth();
 	const location = useLocation();
 	const navigate = useNavigate();
+	const secureAxios = useSecureAxios();
 
 	// Form Register
 	const handleRegister = (data) => {
@@ -34,6 +37,21 @@ const Register = () => {
 							displayName: data.name,
 							photoURL: res.data.data.display_url,
 						};
+
+						const photoURL = res.data.data.url;
+						const userInfo = {
+							email: data.email,
+							displayName: data.name,
+							photoURL: photoURL,
+							role: data.role,
+						};
+
+						secureAxios.post("/users", userInfo).then((res) => {
+							if (res.data.insertedId) {
+								console.log("Registration Completed.");
+							}
+						});
+
 						updateUserProfile(userProfile).then(() => {
 							navigate(location.state || "/");
 							toast.success("Registration successful!");
@@ -45,18 +63,6 @@ const Register = () => {
 			})
 			.catch(() => {
 				toast.error("Email already exists or invalid!");
-			});
-	};
-
-	// Google Register
-	const handleGoogleSignIn = () => {
-		signWithGoogle()
-			.then(() => {
-				navigate(location.state || "/");
-				toast.success("Google login successful!");
-			})
-			.catch(() => {
-				toast.error("Google login failed!");
 			});
 	};
 
@@ -121,6 +127,7 @@ const Register = () => {
 						<div>
 							<label className="form-label">Role</label> <br />
 							<select
+								{...register("role")}
 								defaultValue="Pick a Role"
 								className="select w-full ring-0 outline-0 border border-[#219e648f] bg-[#F3F3F3] dark:bg-gray-900"
 							>
@@ -178,43 +185,9 @@ const Register = () => {
 						<p className="divider text-center py-5 text-[#71717A] font-semibold">
 							OR
 						</p>
-						<button
-							onClick={handleGoogleSignIn}
-							type="button"
-							className="google-button"
-						>
-							<svg
-								aria-label="Google logo"
-								width="20"
-								height="20"
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 512 512"
-							>
-								<g>
-									<path
-										d="m0 0H512V512H0"
-										fill="transparent"
-									></path>
-									<path
-										fill="#34a853"
-										d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
-									></path>
-									<path
-										fill="#4285f4"
-										d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
-									></path>
-									<path
-										fill="#fbbc02"
-										d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
-									></path>
-									<path
-										fill="#ea4335"
-										d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
-									></path>
-								</g>
-							</svg>
-							<span>Sign up with Google</span>
-						</button>
+
+						<Social />
+
 						<p className="text-center text-[#464545] dark:text-white text-[16px] font-medium pt-[22px]">
 							Already have an account?
 							<Link
