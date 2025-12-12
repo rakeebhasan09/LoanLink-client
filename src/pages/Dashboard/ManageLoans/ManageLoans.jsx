@@ -4,6 +4,7 @@ import useAuth from "../../../hooks/useAuth";
 import useSecureAxios from "../../../hooks/useSecureAxios";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
+import Swal from "sweetalert2";
 
 const ManageLoans = () => {
 	const { user } = useAuth();
@@ -16,6 +17,32 @@ const ManageLoans = () => {
 			return res.data;
 		},
 	});
+
+	// Handle Delete Loan
+	const handleDeleteLoan = (id) => {
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You won't be able to revert this!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Yes, delete it!",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				secureAxios.delete(`/loans/${id}`).then((res) => {
+					if (res.data.deletedCount) {
+						refetch();
+						Swal.fire({
+							title: "Deleted!",
+							text: "Loan has been deleted.",
+							icon: "success",
+						});
+					}
+				});
+			}
+		});
+	};
 
 	return (
 		<motion.div
@@ -66,7 +93,12 @@ const ManageLoans = () => {
 									>
 										Update
 									</Link>
-									<button className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#EF5556] text-white border-[#E1E7EF] h-9 rounded-md px-4">
+									<button
+										onClick={() =>
+											handleDeleteLoan(loan._id)
+										}
+										className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#EF5556] text-white border-[#E1E7EF] h-9 rounded-md px-4"
+									>
 										Delete
 									</button>
 								</td>
