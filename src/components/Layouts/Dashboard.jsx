@@ -134,7 +134,7 @@ const Dashboard = () => {
 				</div>
 
 				{/* Content */}
-				<div className="lg:w-[calc(100%-300px)] ml-auto mr-0 p-6 h-full dark:bg-[#080C16]">
+				<div className="lg:w-[calc(100%-300px)] ml-auto mr-0 p-6 h-full! dark:bg-[#080C16]">
 					<Outlet />
 				</div>
 			</div>

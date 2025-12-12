@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import useAuth from "../../../hooks/useAuth";
 import useSecureAxios from "../../../hooks/useSecureAxios";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router";
 
 const ManageLoans = () => {
 	const { user } = useAuth();
@@ -59,9 +60,12 @@ const ManageLoans = () => {
 								<td>{loan.interestRate}%</td>
 								<td>{loan.category}</td>
 								<td>
-									<button className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 border-[#E1E7EF] h-9 rounded-md px-4">
+									<Link
+										to={`/dashboard/update-loan/${loan._id}`}
+										className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 border-[#E1E7EF] h-9 rounded-md px-4"
+									>
 										Update
-									</button>
+									</Link>
 									<button className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#EF5556] text-white border-[#E1E7EF] h-9 rounded-md px-4">
 										Delete
 									</button>

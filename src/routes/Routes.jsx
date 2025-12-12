@@ -14,6 +14,7 @@ import Profile from "../pages/Dashboard/Profile/Profile";
 import MyLoans from "../pages/Dashboard/MyLoans/MyLoans";
 import AddLoan from "../pages/Dashboard/AddLoan/AddLoan";
 import ManageLoans from "../pages/Dashboard/ManageLoans/ManageLoans";
+import UpdateLoan from "../pages/Dashboard/UpdateLoan/UpdateLoan";
 
 export const router = createBrowserRouter([
 	{
@@ -87,6 +88,10 @@ export const router = createBrowserRouter([
 			{
 				path: "add-loan",
 				element: <AddLoan />,
+			},
+			{
+				path: "update-loan/:loanId",
+				element: <UpdateLoan />,
 			},
 			{
 				path: "manage-loans",
