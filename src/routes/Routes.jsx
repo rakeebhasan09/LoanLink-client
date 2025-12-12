@@ -13,6 +13,7 @@ import Dashboard from "../components/Layouts/Dashboard";
 import Profile from "../pages/Dashboard/Profile/Profile";
 import MyLoans from "../pages/Dashboard/MyLoans/MyLoans";
 import AddLoan from "../pages/Dashboard/AddLoan/AddLoan";
+import ManageLoans from "../pages/Dashboard/ManageLoans/ManageLoans";
 
 export const router = createBrowserRouter([
 	{
@@ -86,6 +87,10 @@ export const router = createBrowserRouter([
 			{
 				path: "add-loan",
 				element: <AddLoan />,
+			},
+			{
+				path: "manage-loans",
+				element: <ManageLoans />,
 			},
 		],
 	},
