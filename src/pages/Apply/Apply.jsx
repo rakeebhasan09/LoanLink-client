@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
 import useSecureAxios from "../../hooks/useSecureAxios";
+import Swal from "sweetalert2";
 
 const Apply = () => {
 	const { user } = useAuth();
@@ -23,7 +24,21 @@ const Apply = () => {
 	}, [secureAxios, loanId]);
 
 	const handleLoanApplication = (data) => {
-		console.log(data);
+		data.loanId = loan._id;
+		data.loanInterest = loan.interestRate;
+		data.loanTitle = loan.title;
+
+		secureAxios.post("/loan-applications", data).then((res) => {
+			if (res.data.insertedId) {
+				Swal.fire({
+					position: "center",
+					icon: "success",
+					title: "Your application under review. After all verifications a manager should contact with you.",
+					showConfirmButton: false,
+					timer: 1500,
+				});
+			}
+		});
 	};
 	return (
 		<main className="py-16 dark:bg-[#080C16]">
@@ -67,7 +82,7 @@ const Apply = () => {
 								<div className="space-y-2">
 									<label className="block">Email</label>
 									<input
-										value={user?.email}
+										defaultValue={user?.email}
 										readOnly
 										{...register("email")}
 										className="bg-[#F5F7F9] flex h-10 w-full rounded-md border border-[#E1E7EF] dark:border-transparent px-3 py-2 text-base outline-0 text-[#878B94] dark:bg-[#151E2E] dark:text-[#777C85]"
@@ -84,10 +99,10 @@ const Apply = () => {
 								</div>
 								<div className="space-y-2 md:col-span-2">
 									<label className="block">
-										Interest Rate
+										Interest Rate (%)
 									</label>
 									<input
-										value={`${loan.interestRate}%`}
+										value={loan.interestRate}
 										readOnly
 										{...register("loanInterest")}
 										className="bg-[#F5F7F9] flex h-10 w-full rounded-md border border-[#E1E7EF] dark:border-transparent px-3 py-2 text-base outline-0 text-[#878B94] dark:bg-[#151E2E] dark:text-[#777C85]"
