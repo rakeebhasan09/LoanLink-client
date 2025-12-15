@@ -16,21 +16,37 @@ const PendingLoans = () => {
 		},
 	});
 
+	// Common Fucntion For Update Loan Status
+	const updateLoanStatus = (loanId, newStatus) => {
+		const updatedInfo = {
+			status: newStatus,
+		};
+		secureAxios
+			.patch(`/loan-applications/${loanId}`, updatedInfo)
+			.then((res) => {
+				if (res.data.modifiedCount) {
+					refetch();
+					Swal.fire({
+						position: "center",
+						icon: "success",
+						title: "Loan Status Updated.",
+						showConfirmButton: false,
+						timer: 1500,
+					});
+				}
+			});
+	};
+
 	// Handle Loan Approved
 	const handleLoanApproved = (loanId) => {
-		secureAxios.patch(`/loan-applications/${loanId}`).then((res) => {
-			if (res.data.modifiedCount) {
-				refetch();
-				Swal.fire({
-					position: "center",
-					icon: "success",
-					title: "Loan Status Updated.",
-					showConfirmButton: false,
-					timer: 1500,
-				});
-			}
-		});
+		updateLoanStatus(loanId, "approved");
 	};
+
+	// Handle Loan Reject
+	const handleLoanReject = (loanId) => {
+		updateLoanStatus(loanId, "rejected");
+	};
+
 	return (
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
@@ -86,7 +102,12 @@ const PendingLoans = () => {
 									>
 										Approve
 									</button>
-									<button className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#EF5556] text-white border-[#E1E7EF] h-9 rounded-md px-4">
+									<button
+										onClick={() =>
+											handleLoanReject(pandingLoan._id)
+										}
+										className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#EF5556] text-white border-[#E1E7EF] h-9 rounded-md px-4"
+									>
 										Reject
 									</button>
 									<button className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 border-[#E1E7EF] h-9 rounded-md px-4">

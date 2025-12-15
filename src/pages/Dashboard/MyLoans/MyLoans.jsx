@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import useAuth from "../../../hooks/useAuth";
 import useSecureAxios from "../../../hooks/useSecureAxios";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const MyLoans = () => {
 	const { user } = useAuth();
 	const secureAxios = useSecureAxios();
+	const paymentInfoModalRef = useRef();
+	const [selectedLoan, setSelectedLoan] = useState(null);
 
 	const { data: myLoans = [], refetch } = useQuery({
 		queryKey: ["my-loans", user?.email],
@@ -62,7 +65,12 @@ const MyLoans = () => {
 				});
 			}
 		});
-		console.log(id);
+	};
+
+	// Handle Open Modal
+	const handleOpenModal = (loan) => {
+		setSelectedLoan(loan);
+		paymentInfoModalRef.current.show();
 	};
 
 	return (
@@ -102,9 +110,12 @@ const MyLoans = () => {
 									</span>
 								</td>
 								<td>
-									<button className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 border-[#E1E7EF] h-9 rounded-md px-4">
+									<Link
+										to={`/loan-details/${loan.loanId}`}
+										className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 border-[#E1E7EF] h-9 rounded-md px-4"
+									>
 										View
-									</button>
+									</Link>
 
 									{(loan.feeStatus === "unpaid" ||
 										loan.feeStatus === "pending") && (
@@ -127,7 +138,12 @@ const MyLoans = () => {
 										</button>
 									)}
 									{loan.feeStatus !== "unpaid" && (
-										<button className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#26BD8C] text-white border-[#E1E7EF] h-9 rounded-md px-4">
+										<button
+											onClick={() =>
+												handleOpenModal(loan)
+											}
+											className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#26BD8C] text-white border-[#E1E7EF] h-9 rounded-md px-4"
+										>
 											Paid
 										</button>
 									)}
@@ -137,6 +153,25 @@ const MyLoans = () => {
 					</tbody>
 				</table>
 			</div>
+			{/* Payment Info Modal */}
+			<dialog ref={paymentInfoModalRef} className="modal">
+				<div className="modal-box">
+					<h3 className="font-bold text-lg">Hello!</h3>
+					<p className="pt-4">Email: {selectedLoan?.email}</p>
+					<p className="pt-4">
+						Loan Title: {selectedLoan?.loanTitle}
+					</p>
+					<p className="pt-4">
+						Transaction ID: {selectedLoan?.transactionId}
+					</p>
+					<div className="modal-action">
+						<form method="dialog">
+							{/* if there is a button in form, it will close the modal */}
+							<button className="btn">Close</button>
+						</form>
+					</div>
+				</div>
+			</dialog>
 		</motion.div>
 	);
 };

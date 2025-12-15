@@ -12,15 +12,6 @@ import { Link, useParams } from "react-router";
 import useRole from "../../hooks/useRole";
 import useSecureAxios from "../../hooks/useSecureAxios";
 
-const emiPlans = ["3", "6", "12", "24", "36"];
-
-const requiredDocs = [
-	"Government ID",
-	"Proof of Income",
-	"Bank Statements",
-	"Proof of Address",
-];
-
 const LoanDetails = () => {
 	const { role } = useRole();
 	const { loanId } = useParams();
