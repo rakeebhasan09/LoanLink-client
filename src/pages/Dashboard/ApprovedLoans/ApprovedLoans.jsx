@@ -5,11 +5,11 @@ import { useQuery } from "@tanstack/react-query";
 
 const ApprovedLoans = () => {
 	const secureAxios = useSecureAxios();
-	const { data: approvedLoans = [], refetch } = useQuery({
+	const { data: approvedLoans = [] } = useQuery({
 		queryKey: ["approved-loans"],
 		queryFn: async () => {
 			const res = await secureAxios.get(
-				`/loan-applications?loanStatus=approved`
+				`/loan-applications?feeStatus=approved`
 			);
 			return res.data;
 		},
@@ -46,7 +46,7 @@ const ApprovedLoans = () => {
 												approvedLoan.lastName}
 										</div>
 										<div className="text-sm opacity-50">
-											{approvedLoan.address}
+											{approvedLoan.email}
 										</div>
 									</div>
 								</td>

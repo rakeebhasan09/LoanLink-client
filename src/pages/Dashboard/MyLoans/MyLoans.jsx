@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import useAuth from "../../../hooks/useAuth";
 import useSecureAxios from "../../../hooks/useSecureAxios";
 import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 const MyLoans = () => {
 	const { user } = useAuth();
@@ -24,6 +25,7 @@ const MyLoans = () => {
 		approved: "bg-green-500 text-white",
 	};
 
+	// Handle Payment
 	const handlePayment = async (loan) => {
 		const paymentInfo = {
 			loanId: loan._id,
@@ -34,6 +36,33 @@ const MyLoans = () => {
 			paymentInfo
 		);
 		window.location.assign(res.data.url);
+	};
+
+	// Handle Cancel
+	const handleLoanCancel = (id) => {
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You won't be able to revert this!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Yes, delete it!",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				secureAxios.delete(`/loan-applications/${id}`).then((res) => {
+					if (res.data.deletedCount) {
+						refetch();
+						Swal.fire({
+							title: "Deleted!",
+							text: "Loan request has been deleted.",
+							icon: "success",
+						});
+					}
+				});
+			}
+		});
+		console.log(id);
 	};
 
 	return (
@@ -77,20 +106,25 @@ const MyLoans = () => {
 										View
 									</button>
 
+									{(loan.feeStatus === "unpaid" ||
+										loan.feeStatus === "pending") && (
+										<button
+											onClick={() =>
+												handleLoanCancel(loan._id)
+											}
+											className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#EF5556] text-white border-[#E1E7EF] h-9 rounded-md px-4"
+										>
+											Cancel
+										</button>
+									)}
+
 									{loan.feeStatus === "unpaid" && (
-										<>
-											<button className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#EF5556] text-white border-[#E1E7EF] h-9 rounded-md px-4">
-												Cancle
-											</button>
-											<button
-												onClick={() =>
-													handlePayment(loan)
-												}
-												className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#26BD8C] text-white border-[#E1E7EF] h-9 rounded-md px-4"
-											>
-												Pay Fee
-											</button>
-										</>
+										<button
+											onClick={() => handlePayment(loan)}
+											className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#26BD8C] text-white border-[#E1E7EF] h-9 rounded-md px-4"
+										>
+											Pay Fee
+										</button>
 									)}
 									{loan.feeStatus !== "unpaid" && (
 										<button className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#26BD8C] text-white border-[#E1E7EF] h-9 rounded-md px-4">

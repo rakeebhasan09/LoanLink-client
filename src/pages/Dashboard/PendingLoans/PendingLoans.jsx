@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import useSecureAxios from "../../../hooks/useSecureAxios";
 import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 const PendingLoans = () => {
 	const secureAxios = useSecureAxios();
@@ -14,6 +15,22 @@ const PendingLoans = () => {
 			return res.data;
 		},
 	});
+
+	// Handle Loan Approved
+	const handleLoanApproved = (loanId) => {
+		secureAxios.patch(`/loan-applications/${loanId}`).then((res) => {
+			if (res.data.modifiedCount) {
+				refetch();
+				Swal.fire({
+					position: "center",
+					icon: "success",
+					title: "Loan Status Updated.",
+					showConfirmButton: false,
+					timer: 1500,
+				});
+			}
+		});
+	};
 	return (
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
@@ -46,7 +63,7 @@ const PendingLoans = () => {
 												pandingLoan.lastName}
 										</div>
 										<div className="text-sm opacity-50">
-											{pandingLoan.address}
+											{pandingLoan.email}
 										</div>
 									</div>
 								</td>
@@ -61,7 +78,12 @@ const PendingLoans = () => {
 										.replaceAll(" ", "-")}
 								</td>
 								<td>
-									<button className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#26BD8C] text-white border-[#E1E7EF] h-9 rounded-md px-4">
+									<button
+										onClick={() =>
+											handleLoanApproved(pandingLoan._id)
+										}
+										className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#26BD8C] text-white border-[#E1E7EF] h-9 rounded-md px-4"
+									>
 										Approve
 									</button>
 									<button className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#EF5556] text-white border-[#E1E7EF] h-9 rounded-md px-4">
