@@ -17,6 +17,8 @@ import ManageLoans from "../pages/Dashboard/ManageLoans/ManageLoans";
 import UpdateLoan from "../pages/Dashboard/UpdateLoan/UpdateLoan";
 import PendingLoans from "../pages/Dashboard/PendingLoans/PendingLoans";
 import ApprovedLoans from "../pages/Dashboard/ApprovedLoans/ApprovedLoans";
+import PaymentSuccess from "../pages/Dashboard/PaymentSuccess/PaymentSuccess";
+import PaymentCancel from "../pages/Dashboard/PaymentCancel/PaymentCancel";
 
 export const router = createBrowserRouter([
 	{
@@ -106,6 +108,14 @@ export const router = createBrowserRouter([
 			{
 				path: "approved-loans",
 				element: <ApprovedLoans />,
+			},
+			{
+				path: "payment-success",
+				element: <PaymentSuccess />,
+			},
+			{
+				path: "payment-cancel",
+				element: <PaymentCancel />,
 			},
 		],
 	},

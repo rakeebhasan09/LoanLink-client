@@ -36,7 +36,7 @@ const Dashboard = () => {
 								<li>
 									<Link
 										to="/dashboard/my-loans"
-										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
+										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7] dark:hover:bg-transparent"
 									>
 										<Users />
 										<span>Manage Users</span>
@@ -45,7 +45,7 @@ const Dashboard = () => {
 								<li>
 									<Link
 										to="/dashboard/my-loans"
-										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
+										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7] dark:hover:bg-transparent"
 									>
 										<FileText />
 										<span>All Loan</span>
@@ -54,7 +54,7 @@ const Dashboard = () => {
 								<li>
 									<Link
 										to="/dashboard/my-loans"
-										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
+										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7] dark:hover:bg-transparent"
 									>
 										<FileText />
 										<span>Loan Applications</span>
@@ -69,7 +69,7 @@ const Dashboard = () => {
 								<li>
 									<Link
 										to="/dashboard/add-loan"
-										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
+										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7] dark:hover:bg-transparent"
 									>
 										<PlusCircle />
 										<span>Add Loan</span>
@@ -78,7 +78,7 @@ const Dashboard = () => {
 								<li>
 									<Link
 										to="/dashboard/manage-loans"
-										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
+										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7] dark:hover:bg-transparent"
 									>
 										<FileText />
 										<span>Manage Loans</span>
@@ -87,7 +87,7 @@ const Dashboard = () => {
 								<li>
 									<Link
 										to="/dashboard/pending-loans"
-										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
+										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7] dark:hover:bg-transparent"
 									>
 										<ClipboardList />
 										<span>Pending Applications</span>
@@ -96,7 +96,7 @@ const Dashboard = () => {
 								<li>
 									<Link
 										to="/dashboard/approved-loans"
-										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
+										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7] dark:hover:bg-transparent"
 									>
 										<CheckCircle />
 										<span>Approved Applications</span>
@@ -111,7 +111,7 @@ const Dashboard = () => {
 								<li>
 									<Link
 										to="/dashboard/my-loans"
-										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
+										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7] dark:hover:bg-transparent"
 									>
 										<CreditCard />
 										<span>My Loans</span>
@@ -124,7 +124,7 @@ const Dashboard = () => {
 						<li>
 							<Link
 								to="/dashboard"
-								className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7]"
+								className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7] dark:hover:bg-transparent"
 							>
 								<User />
 								<span>My Profile</span>
@@ -134,7 +134,7 @@ const Dashboard = () => {
 				</div>
 
 				{/* Content */}
-				<div className="lg:w-[calc(100%-300px)] ml-auto mr-0 p-6 h-full! dark:bg-[#080C16]">
+				<div className="lg:w-[calc(100%-300px)] ml-auto mr-0 p-6 min-h-[calc(100vh-64px)] dark:bg-[#080C16]">
 					<Outlet />
 				</div>
 			</div>

@@ -13,6 +13,7 @@ const Apply = () => {
 		register,
 		formState: { errors },
 		handleSubmit,
+		reset,
 	} = useForm();
 	const [loan, setLoan] = useState({});
 	const { loanId } = useParams();
@@ -30,6 +31,8 @@ const Apply = () => {
 
 		secureAxios.post("/loan-applications", data).then((res) => {
 			if (res.data.insertedId) {
+				reset();
+				navigate("/dashboard/my-loans");
 				Swal.fire({
 					position: "center",
 					icon: "success",

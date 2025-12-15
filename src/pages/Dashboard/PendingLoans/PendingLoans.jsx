@@ -1,14 +1,26 @@
 import React from "react";
 import { motion } from "framer-motion";
+import useSecureAxios from "../../../hooks/useSecureAxios";
+import { useQuery } from "@tanstack/react-query";
 
 const PendingLoans = () => {
+	const secureAxios = useSecureAxios();
+	const { data: pendingLoans = [], refetch } = useQuery({
+		queryKey: ["pending-loans"],
+		queryFn: async () => {
+			const res = await secureAxios.get(
+				`/loan-applications?feeStatus=pending`
+			);
+			return res.data;
+		},
+	});
 	return (
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 		>
 			<h1 className="text-2xl font-bold mb-6">
-				Pending Loan Applications
+				Pending Loan Applications {pendingLoans.length}
 			</h1>
 			<div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
 				<table className="table">
@@ -23,30 +35,44 @@ const PendingLoans = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{/* row 1 */}
-						<tr>
-							<td>1</td>
-							<td>
-								<div>
-									<div className="font-bold">
-										Hart Hagerty
+						{pendingLoans.map((pandingLoan, index) => (
+							<tr key={pandingLoan._id}>
+								<td>{index + 1}</td>
+								<td>
+									<div>
+										<div className="font-bold">
+											{pandingLoan.firstName +
+												" " +
+												pandingLoan.lastName}
+										</div>
+										<div className="text-sm opacity-50">
+											{pandingLoan.address}
+										</div>
 									</div>
-									<div className="text-sm opacity-50">
-										United States
-									</div>
-								</div>
-							</td>
-							<td>Quality Control Specialist</td>
-							<td>Blue</td>
-							<td>
-								<button className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#26BD8C] text-white border-[#E1E7EF] h-9 rounded-md px-4">
-									Approve
-								</button>
-								<button className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#EF5556] text-white border-[#E1E7EF] h-9 rounded-md px-4">
-									Reject
-								</button>
-							</td>
-						</tr>
+								</td>
+								<td>${pandingLoan.loanAmount}</td>
+								<td>
+									{new Date(pandingLoan.create_at)
+										.toLocaleDateString("en-GB", {
+											day: "2-digit",
+											month: "short",
+											year: "2-digit",
+										})
+										.replaceAll(" ", "-")}
+								</td>
+								<td>
+									<button className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#26BD8C] text-white border-[#E1E7EF] h-9 rounded-md px-4">
+										Approve
+									</button>
+									<button className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 bg-[#EF5556] text-white border-[#E1E7EF] h-9 rounded-md px-4">
+										Reject
+									</button>
+									<button className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 border-[#E1E7EF] h-9 rounded-md px-4">
+										View
+									</button>
+								</td>
+							</tr>
+						))}
 					</tbody>
 				</table>
 			</div>
