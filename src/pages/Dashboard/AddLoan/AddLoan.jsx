@@ -31,12 +31,7 @@ const AddLoan = () => {
 
 		// Add Manager Email
 		data.managerEmail = user.email;
-
-		if (data.showHome === true) {
-			data.showHome = "visibale";
-		} else {
-			data.showHome = "hidden";
-		}
+		data.created_by = user.displayName;
 
 		// Photo URL
 		const loanPhoto = data.photo[0];

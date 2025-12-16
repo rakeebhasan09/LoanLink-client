@@ -19,6 +19,7 @@ import PendingLoans from "../pages/Dashboard/PendingLoans/PendingLoans";
 import ApprovedLoans from "../pages/Dashboard/ApprovedLoans/ApprovedLoans";
 import PaymentSuccess from "../pages/Dashboard/PaymentSuccess/PaymentSuccess";
 import PaymentCancel from "../pages/Dashboard/PaymentCancel/PaymentCancel";
+import AllLoan from "../pages/Dashboard/AllLoan/AllLoan";
 
 export const router = createBrowserRouter([
 	{
@@ -116,6 +117,10 @@ export const router = createBrowserRouter([
 			{
 				path: "payment-cancel",
 				element: <PaymentCancel />,
+			},
+			{
+				path: "all-loan",
+				element: <AllLoan />,
 			},
 		],
 	},

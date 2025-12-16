@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import useSecureAxios from "../../../hooks/useSecureAxios";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const PendingLoans = () => {
 	const secureAxios = useSecureAxios();
@@ -110,9 +111,12 @@ const PendingLoans = () => {
 									>
 										Reject
 									</button>
-									<button className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 border-[#E1E7EF] h-9 rounded-md px-4">
+									<Link
+										to={`/loan-details/${pandingLoan.loanId}`}
+										className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 border-[#E1E7EF] h-9 rounded-md px-4"
+									>
 										View
-									</button>
+									</Link>
 								</td>
 							</tr>
 						))}
