@@ -21,6 +21,7 @@ import PaymentSuccess from "../pages/Dashboard/PaymentSuccess/PaymentSuccess";
 import PaymentCancel from "../pages/Dashboard/PaymentCancel/PaymentCancel";
 import AllLoan from "../pages/Dashboard/AllLoan/AllLoan";
 import LoanApplications from "../pages/Dashboard/LoanApplications/LoanApplications";
+import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 
 export const router = createBrowserRouter([
 	{
@@ -126,6 +127,10 @@ export const router = createBrowserRouter([
 			{
 				path: "loan-applications",
 				element: <LoanApplications />,
+			},
+			{
+				path: "manage-users",
+				element: <ManageUsers />,
 			},
 		],
 	},

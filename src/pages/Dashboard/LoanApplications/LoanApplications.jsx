@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import useSecureAxios from "../../../hooks/useSecureAxios";
 import { useQuery } from "@tanstack/react-query";
@@ -6,11 +6,14 @@ import { Link } from "react-router";
 
 const LoanApplications = () => {
 	const secureAxios = useSecureAxios();
+	const [searchText, setSearchText] = useState("");
 
 	const { data: loanApplications = [] } = useQuery({
-		queryKey: ["loan-applications"],
+		queryKey: ["loan-applications", searchText],
 		queryFn: async () => {
-			const res = await secureAxios.get("/loan-applications");
+			const res = await secureAxios.get(
+				`/loan-applications?searchText=${searchText}`
+			);
 			return res.data;
 		},
 	});
@@ -25,9 +28,17 @@ const LoanApplications = () => {
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 		>
-			<h1 className="text-2xl font-bold mb-6">
-				Loan Applications {loanApplications.length}
-			</h1>
+			<div className="flex items-center justify-between mb-6">
+				<h1 className="text-2xl font-bold">
+					Loan Applications {loanApplications.length}
+				</h1>
+				<input
+					type="text"
+					onChange={(e) => setSearchText(e.target.value)}
+					placeholder="Search By Status...."
+					className="flex h-10 rounded-md border border-[#E1E7EF] dark:border-[#1F1F1F] outline-0 bg-background px-3 py-2 text-base dark:bg-[#080C16]"
+				/>
+			</div>
 			<div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
 				<table className="table">
 					{/* head */}
