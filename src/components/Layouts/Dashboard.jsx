@@ -53,7 +53,7 @@ const Dashboard = () => {
 								</li>
 								<li>
 									<Link
-										to="/dashboard/my-loans"
+										to="/dashboard/loan-applications"
 										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7] dark:hover:bg-transparent"
 									>
 										<FileText />

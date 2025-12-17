@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import useSecureAxios from "../../../hooks/useSecureAxios";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const AllLoan = () => {
 	const secureAxios = useSecureAxios();
@@ -35,6 +36,23 @@ const AllLoan = () => {
 							icon: "success",
 						});
 					}
+				});
+			}
+		});
+	};
+
+	// Handle Loan Visibillity Status
+	const handleShowHome = (loan) => {
+		const newStatus = { showHome: !loan.showHome };
+		secureAxios.patch(`/loans/${loan._id}`, newStatus).then((res) => {
+			if (res.data.modifiedCount) {
+				refetch();
+				Swal.fire({
+					position: "center",
+					icon: "success",
+					title: "Loan status has been updated.",
+					showConfirmButton: false,
+					timer: 1500,
 				});
 			}
 		});
@@ -83,13 +101,18 @@ const AllLoan = () => {
 								<td>
 									<input
 										checked={loan.showHome}
+										onChange={() => handleShowHome(loan)}
 										type="checkbox"
+										className="cursor-pointer"
 									/>
 								</td>
 								<td>
-									<button className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 text-primary border-[#E1E7EF] h-9 rounded-md px-4">
+									<Link
+										to={`/dashboard/update-loan/${loan._id}`}
+										className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 text-primary border-[#E1E7EF] h-9 rounded-md px-4"
+									>
 										Update
-									</button>
+									</Link>
 									<button
 										onClick={() =>
 											handleDeleteLoans(loan._id)

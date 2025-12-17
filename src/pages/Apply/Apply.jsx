@@ -28,6 +28,7 @@ const Apply = () => {
 		data.loanId = loan._id;
 		data.loanInterest = loan.interestRate;
 		data.loanTitle = loan.title;
+		data.loanCategory = loan.category;
 
 		secureAxios.post("/loan-applications", data).then((res) => {
 			if (res.data.insertedId) {
@@ -242,7 +243,7 @@ const Apply = () => {
 										{...register("loanAmount", {
 											required: true,
 										})}
-										placeholder={`Max: $100000`}
+										placeholder={`Max: ${loan.maxLimit}`}
 										className="flex h-10 w-full rounded-md border border-[#E1E7EF] dark:border-transparent px-3 py-2 text-base outline-0 text-[#878B94] dark:bg-[#080C16] dark:text-white"
 									/>
 									{errors.loanAmount?.type === "required" && (

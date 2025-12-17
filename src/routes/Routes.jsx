@@ -20,6 +20,7 @@ import ApprovedLoans from "../pages/Dashboard/ApprovedLoans/ApprovedLoans";
 import PaymentSuccess from "../pages/Dashboard/PaymentSuccess/PaymentSuccess";
 import PaymentCancel from "../pages/Dashboard/PaymentCancel/PaymentCancel";
 import AllLoan from "../pages/Dashboard/AllLoan/AllLoan";
+import LoanApplications from "../pages/Dashboard/LoanApplications/LoanApplications";
 
 export const router = createBrowserRouter([
 	{
@@ -121,6 +122,10 @@ export const router = createBrowserRouter([
 			{
 				path: "all-loan",
 				element: <AllLoan />,
+			},
+			{
+				path: "loan-applications",
+				element: <LoanApplications />,
 			},
 		],
 	},
