@@ -4,23 +4,38 @@ import { useQuery } from "@tanstack/react-query";
 import useSecureAxios from "../../../hooks/useSecureAxios";
 
 const ManageUsers = () => {
-	const [searchText, setSearchText] = useState("");
 	const secureAxios = useSecureAxios();
-	const { data: users = [] } = useQuery({
-		queryKey: ["users", searchText],
+
+	// Pagination & search state
+	const [searchText, setSearchText] = useState("");
+	const [page, setPage] = useState(1);
+	const limit = 5;
+
+	/* ================================
+     FETCH USERS WITH PAGINATION
+  ================================= */
+	const { data, isLoading } = useQuery({
+		queryKey: ["users", searchText, page],
 		queryFn: async () => {
 			const res = await secureAxios.get(
-				`/users?searchText=${searchText}`
+				`/users?searchText=${encodeURIComponent(
+					searchText
+				)}&page=${page}&limit=${limit}`
 			);
 			return res.data;
 		},
+		keepPreviousData: true, // smooth pagination
 	});
+
+	const users = data?.users || [];
+	const totalPages = data?.totalPages || 1;
 
 	const statusStyles = {
 		pending: "bg-yellow-400 text-white",
 		suspended: "bg-red-500 text-white",
 		active: "bg-green-500 text-white",
 	};
+
 	return (
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
@@ -28,18 +43,25 @@ const ManageUsers = () => {
 		>
 			<div className="flex items-center justify-between mb-6">
 				<h1 className="text-2xl font-bold">
-					Manage Users {users.length}
+					Manage Users ({data?.totalUsers || 0})
 				</h1>
+
+				{/* SEARCH INPUT */}
 				<input
 					type="text"
-					onChange={(e) => setSearchText(e.target.value)}
-					placeholder="Search By Status...."
-					className="flex h-10 rounded-md border border-[#E1E7EF] dark:border-[#1F1F1F] outline-0 bg-background px-3 py-2 text-base dark:bg-[#080C16]"
+					value={searchText}
+					onChange={(e) => {
+						setSearchText(e.target.value);
+						setPage(1); // reset page on new search
+					}}
+					placeholder="Search by name..."
+					className="h-10 rounded-md border border-[#F3F3F3] outline-none px-3"
 				/>
 			</div>
-			<div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+
+			{/* TABLE */}
+			<div className="overflow-x-auto rounded-box border border-[#F3F3F3] bg-base-100">
 				<table className="table">
-					{/* head */}
 					<thead>
 						<tr>
 							<th>Name</th>
@@ -49,30 +71,70 @@ const ManageUsers = () => {
 							<th>Actions</th>
 						</tr>
 					</thead>
+
 					<tbody>
-						{users.map((user) => (
-							<tr key={user._id}>
-								<td>{user.displayName}</td>
-								<td>{user.email}</td>
-								<td>{user.role}</td>
-								<td>
-									<span
-										className={`px-3 py-1 inline-flex items-center justify-center rounded-full ${
-											statusStyles[user.userStatus]
-										}`}
-									>
-										{user.userStatus}
-									</span>
-								</td>
-								<td>
-									<button className="ml-2 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold border-2 text-primary border-[#E1E7EF] h-9 rounded-md px-4">
-										Update
-									</button>
+						{isLoading ? (
+							<tr>
+								<td colSpan="5" className="text-center">
+									Loading...
 								</td>
 							</tr>
-						))}
+						) : (
+							users.map((user) => (
+								<tr key={user._id}>
+									<td>{user.displayName}</td>
+									<td>{user.email}</td>
+									<td>{user.role}</td>
+									<td>
+										<span
+											className={`px-3 py-1 rounded-full ${
+												statusStyles[user.userStatus]
+											}`}
+										>
+											{user.userStatus}
+										</span>
+									</td>
+									<td>
+										<button className="border border-[#F3F3F3] px-4 py-1 rounded-md">
+											Update
+										</button>
+									</td>
+								</tr>
+							))
+						)}
 					</tbody>
 				</table>
+			</div>
+
+			{/* PAGINATION BUTTONS */}
+			<div className="flex justify-center gap-2 mt-6">
+				<button
+					disabled={page === 1}
+					onClick={() => setPage((prev) => prev - 1)}
+					className="px-3 py-1 border rounded disabled:opacity-50"
+				>
+					Prev
+				</button>
+
+				{[...Array(totalPages).keys()].map((num) => (
+					<button
+						key={num}
+						onClick={() => setPage(num + 1)}
+						className={`px-3 py-1 border border-[#F3F3F3] rounded ${
+							page === num + 1 ? "bg-primary text-white" : ""
+						}`}
+					>
+						{num + 1}
+					</button>
+				))}
+
+				<button
+					disabled={page === totalPages}
+					onClick={() => setPage((prev) => prev + 1)}
+					className="px-3 py-1 border rounded disabled:opacity-50"
+				>
+					Next
+				</button>
 			</div>
 		</motion.div>
 	);
