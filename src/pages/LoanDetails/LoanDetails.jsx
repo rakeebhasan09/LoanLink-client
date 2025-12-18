@@ -13,7 +13,7 @@ import useRole from "../../hooks/useRole";
 import useSecureAxios from "../../hooks/useSecureAxios";
 
 const LoanDetails = () => {
-	const { role } = useRole();
+	const { role, userStatus } = useRole();
 	const { loanId } = useParams();
 	const secureAxios = useSecureAxios();
 	const [loan, setLoan] = useState({});
@@ -142,7 +142,8 @@ const LoanDetails = () => {
 
 							{/* Apply Button */}
 							<div>
-								{role === "borrower" ? (
+								{role === "borrower" &&
+								userStatus === "active" ? (
 									<Link
 										className="flex items-center justify-center gap-1.5 bg-primary text-white h-12 rounded-full"
 										to={`/apply/${loanId}`}
@@ -155,7 +156,7 @@ const LoanDetails = () => {
 										disabled
 										className="flex w-full disabled cursor-no-drop items-center justify-center gap-1.5 bg-primary text-white h-12 rounded-full"
 									>
-										Only Borrower Can Apply
+										Only Acitve Borrower Can Apply
 									</button>
 								)}
 							</div>

@@ -2,18 +2,13 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import useSecureAxios from "../../../hooks/useSecureAxios";
+import { Link } from "react-router";
 
 const ManageUsers = () => {
 	const secureAxios = useSecureAxios();
-
-	// Pagination & search state
 	const [searchText, setSearchText] = useState("");
 	const [page, setPage] = useState(1);
 	const limit = 5;
-
-	/* ================================
-     FETCH USERS WITH PAGINATION
-  ================================= */
 	const { data, isLoading } = useQuery({
 		queryKey: ["users", searchText, page],
 		queryFn: async () => {
@@ -24,7 +19,7 @@ const ManageUsers = () => {
 			);
 			return res.data;
 		},
-		keepPreviousData: true, // smooth pagination
+		keepPreviousData: true,
 	});
 
 	const users = data?.users || [];
@@ -46,13 +41,12 @@ const ManageUsers = () => {
 					Manage Users ({data?.totalUsers || 0})
 				</h1>
 
-				{/* SEARCH INPUT */}
 				<input
 					type="text"
 					value={searchText}
 					onChange={(e) => {
 						setSearchText(e.target.value);
-						setPage(1); // reset page on new search
+						setPage(1);
 					}}
 					placeholder="Search by name..."
 					className="h-10 rounded-md border border-[#F3F3F3] outline-none px-3"
@@ -95,9 +89,12 @@ const ManageUsers = () => {
 										</span>
 									</td>
 									<td>
-										<button className="border border-[#F3F3F3] px-4 py-1 rounded-md">
+										<Link
+											to={`/dashboard/update-user/${user._id}`}
+											className="border inline-block border-[#F3F3F3] px-4 py-1 rounded-md"
+										>
 											Update
-										</button>
+										</Link>
 									</td>
 								</tr>
 							))

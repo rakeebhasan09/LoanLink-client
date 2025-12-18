@@ -22,6 +22,9 @@ import PaymentCancel from "../pages/Dashboard/PaymentCancel/PaymentCancel";
 import AllLoan from "../pages/Dashboard/AllLoan/AllLoan";
 import LoanApplications from "../pages/Dashboard/LoanApplications/LoanApplications";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
+import AdminRoute from "./AdminRoute";
+import ManagerRoute from "./ManagerRoute";
+import UpdateUser from "../pages/Dashboard/UpdateUser/UpdateUser";
 
 export const router = createBrowserRouter([
 	{
@@ -94,7 +97,11 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: "add-loan",
-				element: <AddLoan />,
+				element: (
+					<ManagerRoute>
+						<AddLoan />
+					</ManagerRoute>
+				),
 			},
 			{
 				path: "update-loan/:loanId",
@@ -102,15 +109,27 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: "manage-loans",
-				element: <ManageLoans />,
+				element: (
+					<ManagerRoute>
+						<ManageLoans />
+					</ManagerRoute>
+				),
 			},
 			{
 				path: "pending-loans",
-				element: <PendingLoans />,
+				element: (
+					<ManagerRoute>
+						<PendingLoans />
+					</ManagerRoute>
+				),
 			},
 			{
 				path: "approved-loans",
-				element: <ApprovedLoans />,
+				element: (
+					<ManagerRoute>
+						<ApprovedLoans />
+					</ManagerRoute>
+				),
 			},
 			{
 				path: "payment-success",
@@ -122,15 +141,35 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: "all-loan",
-				element: <AllLoan />,
+				element: (
+					<AdminRoute>
+						<AllLoan />
+					</AdminRoute>
+				),
 			},
 			{
 				path: "loan-applications",
-				element: <LoanApplications />,
+				element: (
+					<AdminRoute>
+						<LoanApplications />
+					</AdminRoute>
+				),
 			},
 			{
 				path: "manage-users",
-				element: <ManageUsers />,
+				element: (
+					<AdminRoute>
+						<ManageUsers />
+					</AdminRoute>
+				),
+			},
+			{
+				path: "update-user/:userId",
+				element: (
+					<AdminRoute>
+						<UpdateUser />
+					</AdminRoute>
+				),
 			},
 		],
 	},

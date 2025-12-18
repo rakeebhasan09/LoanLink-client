@@ -14,7 +14,8 @@ import useRole from "../../hooks/useRole";
 
 const Dashboard = () => {
 	const [open, setOpen] = useState(false);
-	const { role } = useRole();
+	const { role, userStatus } = useRole();
+
 	// Sidebar Handler
 	const handleSidebar = () => {
 		setOpen(!open);
@@ -31,7 +32,7 @@ const Dashboard = () => {
 				>
 					<ul className="px-4 py-10">
 						{/* Links For Admin Only */}
-						{role === "admin" && (
+						{role === "admin" && userStatus === "active" && (
 							<>
 								<li>
 									<Link
@@ -64,7 +65,7 @@ const Dashboard = () => {
 						)}
 
 						{/* Links For Manager Only */}
-						{role === "manager" && (
+						{role === "manager" && userStatus === "active" && (
 							<>
 								<li>
 									<Link
@@ -106,7 +107,7 @@ const Dashboard = () => {
 						)}
 
 						{/* Links For Borrower Only */}
-						{role === "borrower" && (
+						{role === "borrower" && userStatus === "active" && (
 							<>
 								<li>
 									<Link
