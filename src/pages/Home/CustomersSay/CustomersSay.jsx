@@ -91,7 +91,6 @@ const CustomersSay = () => {
 					</div>
 
 					<Swiper
-						// this attaches the swiper instance to swiperRef
 						onSwiper={(swiper) => {
 							swiperRef.current = swiper;
 						}}

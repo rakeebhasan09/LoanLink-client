@@ -27,9 +27,7 @@ const UpdateLoan = () => {
 			animate={{ opacity: 1, y: 0 }}
 			className="h-full!"
 		>
-			<h1 className="text-2xl font-bold mb-6">
-				Update Loan Information {loanId}
-			</h1>
+			<h1 className="text-2xl font-bold mb-6">Update Loan Information</h1>
 			<form className="max-w-xl space-y-4 p-6 rounded-xl border border-[#E1E7EF] text-[#0F1729] dark:text-white dark:bg-[#0C1322] dark:border-[#1F1F1F]">
 				{/* Loan Title */}
 				<div className="space-y-1">

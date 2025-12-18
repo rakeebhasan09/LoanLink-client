@@ -26,7 +26,7 @@ Live URL: https://loan-link.netlify.app
 1. `axios` for data fetching.
 2. `firebase` for user login and registration (Google and email / password)
 3. `lucide-react` and `react-icons` for icons.
-4. `motion` for animation.
+4. `framer-motion` for animation.
 5. `react-hook-form` for form validation.
 6. `react-router` for routing.
 7. `react-toastify` and `sweetalert2` for notifications.

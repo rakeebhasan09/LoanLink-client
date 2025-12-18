@@ -156,7 +156,9 @@ const MyLoans = () => {
 			{/* Payment Info Modal */}
 			<dialog ref={paymentInfoModalRef} className="modal">
 				<div className="modal-box">
-					<h3 className="font-bold text-lg">Hello!</h3>
+					<h3 className="font-bold text-lg">
+						Hello! {user?.displayName}
+					</h3>
 					<p className="pt-4">Email: {selectedLoan?.email}</p>
 					<p className="pt-4">
 						Loan Title: {selectedLoan?.loanTitle}
