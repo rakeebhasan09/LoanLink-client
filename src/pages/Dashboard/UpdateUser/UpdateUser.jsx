@@ -159,7 +159,7 @@ const UpdateUser = () => {
 						<X />
 					</div>
 					<h3 className="font-bold text-lg">
-						Hello! {user?.displayName} {user?._id}
+						Hello! {user?.displayName}
 					</h3>
 					<form
 						onSubmit={handleSubmit(handleUserSuspended)}
