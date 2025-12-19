@@ -25,6 +25,7 @@ import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import ManagerRoute from "./ManagerRoute";
 import UpdateUser from "../pages/Dashboard/UpdateUser/UpdateUser";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
 	{
@@ -172,5 +173,10 @@ export const router = createBrowserRouter([
 				),
 			},
 		],
+	},
+
+	{
+		path: "*",
+		Component: ErrorPage,
 	},
 ]);
