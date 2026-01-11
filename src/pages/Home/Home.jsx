@@ -6,6 +6,7 @@ import StatsSection from "./StatsSection/StatsSection";
 import CustomersSay from "./CustomersSay/CustomersSay";
 import FAQSection from "./FAQSection/FAQSection";
 import CTASection from "./CTASection/CTASection";
+import WhyChooseUs from "./WhyChooseUs/WhyChooseUs";
 
 const Home = () => {
 	return (
@@ -17,6 +18,7 @@ const Home = () => {
 			<CustomersSay />
 			<FAQSection />
 			<CTASection />
+			<WhyChooseUs />
 		</>
 	);
 };
