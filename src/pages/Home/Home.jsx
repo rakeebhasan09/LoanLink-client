@@ -7,6 +7,7 @@ import CustomersSay from "./CustomersSay/CustomersSay";
 import FAQSection from "./FAQSection/FAQSection";
 import CTASection from "./CTASection/CTASection";
 import WhyChooseUs from "./WhyChooseUs/WhyChooseUs";
+import BlogTips from "./BlogTips/BlogTips";
 
 const Home = () => {
 	return (
@@ -19,6 +20,7 @@ const Home = () => {
 			<FAQSection />
 			<CTASection />
 			<WhyChooseUs />
+			<BlogTips />
 		</>
 	);
 };
