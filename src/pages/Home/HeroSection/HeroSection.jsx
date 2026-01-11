@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Shield, Clock, Percent, Users, TrendingUp, Award } from "lucide-react";
+import { Link } from "react-router";
 
 const HeroSection = () => {
 	return (
@@ -36,9 +37,12 @@ const HeroSection = () => {
 								<span>→</span>
 							</button>
 
-							<button className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-[#1bc298] border border-[#1bc298] bg-transparent hover:bg-[#1bc298]/10 transition">
+							<Link
+								to={"/all-loans"}
+								className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-[#1bc298] border border-[#1bc298] bg-transparent hover:bg-[#1bc298]/10 transition"
+							>
 								Explore Loans
-							</button>
+							</Link>
 						</div>
 
 						{/* Trust Indicators */}

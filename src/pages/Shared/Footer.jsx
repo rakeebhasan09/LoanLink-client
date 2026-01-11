@@ -39,16 +39,16 @@ const Footer = () => {
 							</h4>
 							<ul className="flex flex-col gap-3">
 								<li className="text-[18px] text-[#E9F7EF] font-medium">
-									Home
+									<Link to={"/"}>Home</Link>
 								</li>
 								<li className="text-[18px] text-[#E9F7EF] font-medium">
-									All Loans
+									<Link to={"/all-loans"}>All Loans</Link>
 								</li>
 								<li className="text-[18px] text-[#E9F7EF] font-medium">
-									About Us
+									<Link to={"/about"}>About Us</Link>
 								</li>
 								<li className="text-[18px] text-[#E9F7EF] font-medium">
-									Contact
+									<Link to={"/contact"}>Contact</Link>
 								</li>
 							</ul>
 						</div>

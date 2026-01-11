@@ -63,38 +63,54 @@ const AllLoans = () => {
 						</div>
 
 						{/* Tabs */}
-						<div className="flex flex-wrap gap-2">
-							<button
-								onClick={() => setSelectedCategory("all")}
-								className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold transition-all duration-300 border-2 border-[#E1E7EF] hover:bg-primary hover:text-white h-9 rounded-md px-4"
-							>
-								All
-							</button>
-							{categories.map((category) => (
+						{filterdLoans.length > 0 && (
+							<div className="flex flex-wrap gap-2">
 								<button
-									className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold transition-all duration-300 border-2 border-[#E1E7EF] hover:bg-primary hover:text-white h-9 rounded-md px-4"
-									key={category}
-									variant={
-										selectedCategory === category
-											? "default"
-											: "outline"
-									}
-									size="sm"
-									onClick={() =>
-										setSelectedCategory(category)
-									}
+									onClick={() => setSelectedCategory("all")}
+									className={`inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold transition-all duration-300 border-2 border-[#E1E7EF] hover:bg-primary hover:text-white h-9 rounded-md px-4 ${
+										selectedCategory === "all"
+											? "bg-primary text-white"
+											: ""
+									}`}
 								>
-									{category}
+									All
 								</button>
-							))}
-						</div>
+								{categories.map((category) => (
+									<button
+										className={`inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold transition-all duration-300 border-2 border-[#E1E7EF] h-9 rounded-md px-4 hover:bg-primary hover:text-white ${
+											selectedCategory === category
+												? "bg-primary text-white"
+												: ""
+										}`}
+										key={category}
+										variant={
+											selectedCategory === category
+												? "default"
+												: "outline"
+										}
+										size="sm"
+										onClick={() =>
+											setSelectedCategory(category)
+										}
+									>
+										{category}
+									</button>
+								))}
+							</div>
+						)}
 					</div>
 
 					{/* Loan Cards */}
 					<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-						{filterdLoans.map((loan) => (
-							<LoanCard key={loan._id} loan={loan} />
-						))}
+						{filterdLoans.length > 0 ? (
+							filterdLoans.map((loan) => (
+								<LoanCard key={loan._id} loan={loan} />
+							))
+						) : (
+							<p className="text-center col-span-full text-4xl font-semibold">
+								No Loans Found
+							</p>
+						)}
 					</div>
 				</div>
 			</section>

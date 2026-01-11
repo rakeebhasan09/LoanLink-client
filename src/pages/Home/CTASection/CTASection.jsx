@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Shield, Clock, Headphones } from "lucide-react";
+import { Link } from "react-router";
 
 const features = [
 	{
@@ -49,9 +50,12 @@ const CTASection = () => {
 								<span>→</span>
 							</button>
 
-							<button className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-[#1bc298] border border-[#1bc298] bg-transparent hover:bg-[#1bc298]/10 transition">
+							<Link
+								to={"/contact"}
+								className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-[#1bc298] border border-[#1bc298] bg-transparent hover:bg-[#1bc298]/10 transition"
+							>
 								Contact Us
-							</button>
+							</Link>
 						</div>
 					</motion.div>
 

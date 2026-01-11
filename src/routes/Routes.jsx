@@ -26,6 +26,7 @@ import AdminRoute from "./AdminRoute";
 import ManagerRoute from "./ManagerRoute";
 import UpdateUser from "../pages/Dashboard/UpdateUser/UpdateUser";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import DemoInfoLogin from "../pages/AuthPage/DemoInfoLogin/DemoInfoLogin";
 
 export const router = createBrowserRouter([
 	{
@@ -62,7 +63,7 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: "/login",
-				Component: Login,
+				Component: DemoInfoLogin,
 			},
 			{
 				path: "/register",

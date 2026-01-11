@@ -101,12 +101,21 @@ const AddLoan = () => {
 					{/* Loan Category */}
 					<div className="space-y-1">
 						<label className="block">Category</label>
-						<input
-							type="text"
-							placeholder="Loan Category Here...."
+
+						<select
+							defaultValue={"Select Loan Category"}
 							className="flex h-10 w-full rounded-md border border-[#E1E7EF] dark:border-[#1F1F1F] outline-0 bg-background px-3 py-2 text-base dark:bg-[#080C16]"
 							{...register("category", { required: true })}
-						/>
+						>
+							<option disabled>Select Loan Category</option>
+							<option value="Personal">Personal Loan</option>
+							<option value="Business">Business Loan</option>
+							<option value="Education">Education Loan</option>
+							<option value="Medical">Medical Loan</option>
+							<option value="Home">Home Improvement</option>
+							<option value="Emergency">Emergency Loan</option>
+						</select>
+
 						{errors.category?.type === "required" && (
 							<p className="text-red-500 text-xs">
 								Category is required
