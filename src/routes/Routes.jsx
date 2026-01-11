@@ -50,11 +50,7 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: "/loan-details/:loanId",
-				element: (
-					<PrivetRoute>
-						<LoanDetails />
-					</PrivetRoute>
-				),
+				element: <LoanDetails />,
 			},
 			{
 				path: "/apply/:loanId",

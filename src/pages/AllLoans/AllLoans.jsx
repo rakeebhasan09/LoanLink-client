@@ -1,20 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
 import LoanCard from "../Shared/LoanCard";
 import useSecureAxios from "../../hooks/useSecureAxios";
 
 const AllLoans = () => {
 	const [searchTerm, setSearchTerm] = useState("");
-	const [loans, setLoans] = useState([]);
 	const [selectedCategory, setSelectedCategory] = useState("all");
 	const secureAxios = useSecureAxios();
 
-	useEffect(() => {
-		secureAxios.get("/loans").then((res) => setLoans(res.data));
-	}, [secureAxios]);
+	const { data: loans = [] } = useQuery({
+		queryKey: ["all-loans", searchTerm],
+		queryFn: async () => {
+			const res = await secureAxios.get(
+				`/loans?searchLoan=${searchTerm}`
+			);
+			return res.data;
+		},
+	});
 
 	const categories = [...new Set(loans.map((loan) => loan.category))];
+
+	const filterdLoans =
+		selectedCategory === "all"
+			? loans
+			: loans.filter((loan) => loan.category === selectedCategory);
 
 	return (
 		<main>
@@ -53,7 +64,10 @@ const AllLoans = () => {
 
 						{/* Tabs */}
 						<div className="flex flex-wrap gap-2">
-							<button className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold transition-all duration-300 border-2 border-[#E1E7EF] hover:bg-primary hover:text-white h-9 rounded-md px-4">
+							<button
+								onClick={() => setSelectedCategory("all")}
+								className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold transition-all duration-300 border-2 border-[#E1E7EF] hover:bg-primary hover:text-white h-9 rounded-md px-4"
+							>
 								All
 							</button>
 							{categories.map((category) => (
@@ -78,7 +92,7 @@ const AllLoans = () => {
 
 					{/* Loan Cards */}
 					<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-						{loans.map((loan) => (
+						{filterdLoans.map((loan) => (
 							<LoanCard key={loan._id} loan={loan} />
 						))}
 					</div>
