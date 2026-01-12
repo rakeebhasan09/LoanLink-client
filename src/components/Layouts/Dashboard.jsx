@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DashboardNavbar from "../../pages/Dashboard/DashboardNavbar/DashboardNavbar";
 import { Link, Outlet } from "react-router";
 import {
+	ChartNoAxesCombined,
 	CheckCircle,
 	ClipboardList,
 	CreditCard,
@@ -26,7 +27,7 @@ const Dashboard = () => {
 			<div className="relative grow min-h-[calc(100vh-64px)]">
 				{/* Aside Bar */}
 				<div
-					className={`absolute lg:left-0 bg-[#FAFAFA] dark:bg-[#0B111E] w-[300px] h-full transition-all duration-300 dark:border-r dark:border-r-primary ${
+					className={`absolute lg:left-0 bg-[#FAFAFA] z-99999 dark:bg-[#0B111E] w-[300px] h-full transition-all duration-300 dark:border-r dark:border-r-primary ${
 						open ? "left-0" : "left-[-400px]"
 					}`}
 				>
@@ -59,6 +60,15 @@ const Dashboard = () => {
 									>
 										<FileText />
 										<span>Loan Applications</span>
+									</Link>
+								</li>
+								<li>
+									<Link
+										to="/dashboard/loan-stats"
+										className="flex px-3 py-2.5 items-center gap-2 text-[#3F3F46] dark:text-[#F2F2F3] hover:bg-[#F1FAF7] dark:hover:bg-transparent"
+									>
+										<ChartNoAxesCombined />
+										<span>Loan Stats</span>
 									</Link>
 								</li>
 							</>

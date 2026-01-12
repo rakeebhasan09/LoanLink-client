@@ -27,6 +27,7 @@ import ManagerRoute from "./ManagerRoute";
 import UpdateUser from "../pages/Dashboard/UpdateUser/UpdateUser";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import DemoInfoLogin from "../pages/AuthPage/DemoInfoLogin/DemoInfoLogin";
+import LoanStats from "../pages/Dashboard/LoanStats/LoanStats";
 
 export const router = createBrowserRouter([
 	{
@@ -166,6 +167,14 @@ export const router = createBrowserRouter([
 				element: (
 					<AdminRoute>
 						<UpdateUser />
+					</AdminRoute>
+				),
+			},
+			{
+				path: "loan-stats",
+				element: (
+					<AdminRoute>
+						<LoanStats />
 					</AdminRoute>
 				),
 			},

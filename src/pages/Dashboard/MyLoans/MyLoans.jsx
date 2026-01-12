@@ -5,6 +5,7 @@ import useSecureAxios from "../../../hooks/useSecureAxios";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { Link } from "react-router";
+import LoanStatusPieChart from "./LoanStatusPieChart";
 
 const MyLoans = () => {
 	const { user } = useAuth();
@@ -81,6 +82,8 @@ const MyLoans = () => {
 			<h1 className="text-2xl font-bold mb-6">
 				My Loan Applications {myLoans.length}
 			</h1>
+
+			{/* Data Display Table */}
 			<div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
 				<table className="table">
 					{/* head */}
@@ -153,6 +156,12 @@ const MyLoans = () => {
 					</tbody>
 				</table>
 			</div>
+
+			{/* Stats Chart */}
+			<div className="pt-14">
+				<LoanStatusPieChart />
+			</div>
+
 			{/* Payment Info Modal */}
 			<dialog ref={paymentInfoModalRef} className="modal">
 				<div className="modal-box">
